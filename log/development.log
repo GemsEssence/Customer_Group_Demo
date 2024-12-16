@@ -1,0 +1,2172 @@
+Started GET "/" for ::1 at 2024-12-16 18:51:38 +0530
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.7ms | Allocations: 634)
+Completed 200 OK in 13ms (Views: 2.7ms | ActiveRecord: 0.0ms | Allocations: 7383)
+
+
+  [1m[35m (159.2ms)[0m  [1m[35mCREATE DATABASE "customer_group_demo" ENCODING = 'utf8'[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE DATABASE "customer_group_demo" ENCODING = 'utf8'[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(97096565522610570)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateCustomerGroups (20241216133100)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "customer_groups" ("id" bigserial primary key, "name" character varying, "is_deafult" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20241216133100"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCustomers (20241216133409)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "customers" ("id" bigserial primary key, "name" character varying, "email" character varying, "mobile_no" character varying, "address" character varying, "is_active" boolean, "customer_group_id" bigint NOT NULL, "due_amount" decimal, "position" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_94ea3eb813"
+FOREIGN KEY ("customer_group_id")
+  REFERENCES "customer_groups" ("id")
+)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_customers_on_customer_group_id" ON "customers" ("customer_group_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20241216133409"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2024-12-16 14:30:58.248207"], ["updated_at", "2024-12-16 14:30:58.248207"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(97096565522610570)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2024-12-16 20:05:18 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.8ms | Allocations: 491)
+Completed 200 OK in 6ms (Views: 2.2ms | ActiveRecord: 0.0ms | Allocations: 4346)
+
+
+Started GET "/customers" for ::1 at 2024-12-16 20:05:27 +0530
+Processing by CustomersController#index as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 1193)
+
+
+  
+NameError (uninitialized constant Customer::Titleize):
+  
+app/models/customer.rb:13:in `<class:Customer>'
+app/models/customer.rb:12:in `<main>'
+app/controllers/customers_controller.rb:5:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:07:19 +0530
+Processing by CustomersController#index as HTML
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 2885)
+
+
+  
+NameError (uninitialized constant CustomersController::Web):
+  
+app/controllers/customers_controller.rb:5:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:11:09 +0530
+Processing by CustomersController#index as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1567)
+
+
+  
+NameError (uninitialized constant CustomersController::Web):
+  
+app/controllers/customers_controller.rb:5:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:15:20 +0530
+Processing by CustomersController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 983)
+
+
+  
+NoMethodError (undefined method `current_filter_params' for #<CustomersController:0x00000000018f60>):
+  
+app/controllers/customers_controller.rb:6:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:17:10 +0530
+  
+SyntaxError (/home/laptop12/work/Customer_Group_Demo/app/controllers/customers_controller.rb:25: else without rescue is useless
+    else
+    ^~~~
+/home/laptop12/work/Customer_Group_Demo/app/controllers/customers_controller.rb:94: syntax error, unexpected end-of-input):
+  
+app/controllers/customers_controller.rb:25: else without rescue is useless
+app/controllers/customers_controller.rb:94: syntax error, unexpected end-of-input
+app/controllers/customers_controller.rb:25: else without rescue is useless
+app/controllers/customers_controller.rb:94: syntax error, unexpected end-of-input
+Started GET "/customers" for ::1 at 2024-12-16 20:17:59 +0530
+Processing by CustomersController#index as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 903)
+
+
+  
+NoMethodError (undefined method `pluck' for Customers:Module):
+  
+app/searches/customer_search.rb:16:in `ids'
+app/controllers/customers_controller.rb:6:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:19:44 +0530
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Pluck (0.3ms)[0m  [1m[34mSELECT "customers"."id" FROM "customers"[0m
+  ↳ app/searches/customer_search.rb:16:in `ids'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 1.1ms | Allocations: 3869)
+
+
+  
+NoMethodError (undefined method `page' for #<ActiveRecord::Relation []>):
+  
+app/controllers/customers_controller.rb:7:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:20:16 +0530
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Pluck (0.1ms)[0m  [1m[34mSELECT "customers"."id" FROM "customers"[0m
+  ↳ app/searches/customer_search.rb:16:in `ids'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.8ms | Allocations: 3322)
+
+
+  
+NoMethodError (undefined method `per' for #<ActiveRecord::Relation []>):
+  
+app/controllers/customers_controller.rb:7:in `index'
+Started GET "/customers" for ::1 at 2024-12-16 20:20:33 +0530
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Pluck (0.1ms)[0m  [1m[34mSELECT "customers"."id" FROM "customers"[0m
+  ↳ app/searches/customer_search.rb:16:in `ids'
+Completed 406 Not Acceptable in 4ms (ActiveRecord: 0.7ms | Allocations: 3616)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#index is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers/new" for ::1 at 2024-12-16 20:21:26 +0530
+Processing by CustomersController#new as HTML
+Completed 406 Not Acceptable in 16ms (ActiveRecord: 4.4ms | Allocations: 8359)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#new is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers/edit" for ::1 at 2024-12-16 20:21:30 +0530
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for CustomersController):
+  
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:146:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customer_groups" for ::1 at 2024-12-16 20:21:52 +0530
+Processing by CustomerGroupsController#index as HTML
+  [1m[36mCustomerGroup Load (0.3ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" /* loading for inspect */ ORDER BY name LIMIT $1[0m  [["LIMIT", 11]]
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 4163)
+
+
+  [1m[36mCACHE CustomerGroup Load (0.0ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" /* loading for inspect */ ORDER BY name LIMIT $1[0m  [["LIMIT", 11]]
+  
+NoMethodError (undefined method `page' for #<ActiveRecord::Relation []>):
+  
+app/controllers/customer_groups_controller.rb:7:in `index'
+Started GET "/customer_groups" for ::1 at 2024-12-16 20:22:45 +0530
+Processing by CustomerGroupsController#index as HTML
+Completed 406 Not Acceptable in 2ms (ActiveRecord: 0.0ms | Allocations: 2310)
+
+
+  
+ActionController::MissingExactTemplate (CustomerGroupsController#index is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customer_groups/edit" for ::1 at 2024-12-16 20:22:50 +0530
+Processing by CustomerGroupsController#show as HTML
+  Parameters: {"id"=>"edit"}
+  [1m[36mCustomerGroup Load (0.4ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/customer_groups_controller.rb:91:in `set_customer_group'
+Completed 404 Not Found in 13ms (ActiveRecord: 6.3ms | Allocations: 2682)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find CustomerGroup with 'id'=edit):
+  
+app/controllers/customer_groups_controller.rb:91:in `set_customer_group'
+Started GET "/customer_groups/new" for ::1 at 2024-12-16 20:23:40 +0530
+Processing by CustomerGroupsController#new as HTML
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 570)
+
+
+  
+NoMethodError (undefined method `new' for CustomerGroups:Module):
+  
+app/controllers/customer_groups_controller.rb:11:in `new'
+Started GET "/customer_groups/new" for ::1 at 2024-12-16 20:23:52 +0530
+Processing by CustomerGroupsController#new as HTML
+Completed 406 Not Acceptable in 7ms (ActiveRecord: 1.7ms | Allocations: 4365)
+
+
+  
+ActionController::MissingExactTemplate (CustomerGroupsController#new is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customer_groups/new" for ::1 at 2024-12-16 20:23:56 +0530
+Processing by CustomerGroupsController#new as HTML
+Completed 406 Not Acceptable in 0ms (ActiveRecord: 0.0ms | Allocations: 554)
+
+
+  
+ActionController::MissingExactTemplate (CustomerGroupsController#new is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customer_groups/edit" for ::1 at 2024-12-16 20:24:00 +0530
+Processing by CustomerGroupsController#show as HTML
+  Parameters: {"id"=>"edit"}
+  [1m[36mCustomerGroup Load (0.5ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/customer_groups_controller.rb:91:in `set_customer_group'
+Completed 404 Not Found in 4ms (ActiveRecord: 0.5ms | Allocations: 1550)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find CustomerGroup with 'id'=edit):
+  
+app/controllers/customer_groups_controller.rb:91:in `set_customer_group'
+Started GET "/customer_groups/edit/1" for ::1 at 2024-12-16 20:24:05 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/customer_groups/edit/1"):
+  
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "customer_groups" WHERE LOWER("customer_groups"."name") = LOWER($1) AND "customer_groups"."agency_id" IS NULL LIMIT $2[0m  [["name", "Group 1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Exists? (3.2ms)[0m  [1m[34mSELECT 1 AS one FROM "customer_groups" WHERE LOWER("customer_groups"."name") = LOWER($1) LIMIT $2[0m  [["name", "Group 1"], ["LIMIT", 1]]
+  [1m[36mCustomerGroup Create (1.1ms)[0m  [1m[32mINSERT INTO "customer_groups" ("name", "is_deafult", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Group 1"], ["is_deafult", true], ["created_at", "2024-12-16 14:56:33.818951"], ["updated_at", "2024-12-16 14:56:33.818951"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/customer_groups/edit/1" for ::1 at 2024-12-16 20:26:40 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/customer_groups/edit/1"):
+  
+Started GET "/customer_groups/edit/1" for ::1 at 2024-12-16 20:26:41 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/customer_groups/edit/1"):
+  
+  [1m[36mCustomerGroup Load (0.8ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" ORDER BY "customer_groups"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/rails/info/routes" for ::1 at 2024-12-16 20:27:09 +0530
+Processing by Rails::InfoController#routes as HTML
+  Rendering layout /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/layouts/application.html.erb
+  Rendering /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/rails/info/routes.html.erb within layouts/application
+  Rendered collection of /home/laptop12/.rvm/gems/ruby-3.2.1/gems/actionpack-7.0.8.7/lib/action_dispatch/middleware/templates/routes/_route.html.erb [46 times] (Duration: 7.6ms | Allocations: 7463)
+  Rendered /home/laptop12/.rvm/gems/ruby-3.2.1/gems/actionpack-7.0.8.7/lib/action_dispatch/middleware/templates/routes/_table.html.erb (Duration: 0.8ms | Allocations: 885)
+  Rendered /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/rails/info/routes.html.erb within layouts/application (Duration: 12.1ms | Allocations: 12768)
+  Rendered layout /home/laptop12/.rvm/gems/ruby-3.2.1/gems/railties-7.0.8.7/lib/rails/templates/layouts/application.html.erb (Duration: 12.6ms | Allocations: 13049)
+Completed 200 OK in 15ms (Views: 14.2ms | ActiveRecord: 0.0ms | Allocations: 13948)
+
+
+Started GET "/rails/info/routes?path=cus" for ::1 at 2024-12-16 20:27:16 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"cus"}
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 2487)
+
+
+Started GET "/rails/info/routes?path=customer" for ::1 at 2024-12-16 20:27:17 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 1044)
+
+
+Started GET "/rails/info/routes?path=customer+" for ::1 at 2024-12-16 20:27:18 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer "}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 814)
+
+
+Started GET "/rails/info/routes?path=customer" for ::1 at 2024-12-16 20:27:18 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 1044)
+
+
+Started GET "/rails/info/routes?path=customer_g" for ::1 at 2024-12-16 20:27:19 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer_g"}
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 926)
+
+
+Started GET "/rails/info/routes?path=customer_groups" for ::1 at 2024-12-16 20:27:20 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer_groups"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 965)
+
+
+Started GET "/customer_groups/1/edit" for ::1 at 2024-12-16 20:27:36 +0530
+Processing by CustomerGroupsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomerGroup Load (0.2ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/customer_groups_controller.rb:91:in `set_customer_group'
+Completed 406 Not Acceptable in 8ms (ActiveRecord: 1.8ms | Allocations: 4827)
+
+
+  
+ActionController::MissingExactTemplate (CustomerGroupsController#edit is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[36mCustomer Load (0.3ms)[0m  [1m[34mSELECT "customers".* FROM "customers" ORDER BY "customers"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Load (0.2ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCustomer Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "customers" WHERE LOWER("customers"."mobile_no") = LOWER($1) AND "customers"."agency" IS NULL AND "customers"."discarded_at" IS NULL LIMIT $2[0m  [["mobile_no", "1234567890"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+Started GET "/customer_groups/1/edit" for ::1 at 2024-12-16 20:31:26 +0530
+Processing by CustomerGroupsController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomerGroup Load (0.2ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/customer_groups_controller.rb:91:in `set_customer_group'
+Completed 406 Not Acceptable in 6ms (ActiveRecord: 1.8ms | Allocations: 4492)
+
+
+  
+ActionController::MissingExactTemplate (CustomerGroupsController#edit is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers" for ::1 at 2024-12-16 20:31:34 +0530
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Pluck (0.1ms)[0m  [1m[34mSELECT "customers"."id" FROM "customers"[0m
+  ↳ app/searches/customer_search.rb:14:in `ids'
+Completed 406 Not Acceptable in 5ms (ActiveRecord: 0.8ms | Allocations: 3480)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#index is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Load (0.1ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCustomer Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "customers" WHERE LOWER("customers"."mobile_no") = LOWER($1) AND "customers"."discarded_at" IS NULL LIMIT $2[0m  [["mobile_no", "1234567890"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Load (0.4ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCustomer Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "customers" WHERE LOWER("customers"."mobile_no") = LOWER($1) AND "customers"."discarded_at" IS NULL LIMIT $2[0m  [["mobile_no", "1234567890"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Load (0.6ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCustomer Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "customers" WHERE LOWER("customers"."mobile_no") = LOWER($1) AND "customers"."discarded_at" IS NULL LIMIT $2[0m  [["mobile_no", "1234567890"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mCustomerGroup Load (0.3ms)[0m  [1m[34mSELECT "customer_groups".* FROM "customer_groups" WHERE "customer_groups"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCustomer Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "customers" WHERE LOWER("customers"."mobile_no") = LOWER($1) LIMIT $2[0m  [["mobile_no", "1234567890"], ["LIMIT", 1]]
+  [1m[36mCustomer Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "customers" WHERE LOWER("customers"."name") = LOWER($1) LIMIT $2[0m  [["name", "Customer 1"], ["LIMIT", 1]]
+  [1m[36mCustomer Create (1.0ms)[0m  [1m[32mINSERT INTO "customers" ("name", "email", "mobile_no", "address", "is_active", "customer_group_id", "due_amount", "position", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Customer 1"], ["email", "customer1@gmail.com"], ["mobile_no", "1234567890"], ["address", "address"], ["is_active", true], ["customer_group_id", 1], ["due_amount", nil], ["position", 1], ["created_at", "2024-12-16 15:05:29.372399"], ["updated_at", "2024-12-16 15:05:29.372399"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/customers" for ::1 at 2024-12-16 20:35:33 +0530
+Processing by CustomersController#index as HTML
+  [1m[36mCustomer Pluck (0.1ms)[0m  [1m[34mSELECT "customers"."id" FROM "customers"[0m
+  ↳ app/searches/customer_search.rb:14:in `ids'
+Completed 406 Not Acceptable in 4ms (ActiveRecord: 0.8ms | Allocations: 3325)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#index is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers/1/edit" for ::1 at 2024-12-16 20:35:39 +0530
+Processing by CustomersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/customers_controller.rb:92:in `set_customer'
+Completed 406 Not Acceptable in 6ms (ActiveRecord: 1.4ms | Allocations: 4053)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#edit is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers/1/edit" for ::1 at 2024-12-16 20:36:23 +0530
+Processing by CustomersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomer Load (0.6ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/customers_controller.rb:92:in `set_customer'
+Completed 406 Not Acceptable in 4ms (ActiveRecord: 0.6ms | Allocations: 1140)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#edit is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers/1/edit" for ::1 at 2024-12-16 20:36:33 +0530
+Processing by CustomersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCustomer Load (0.2ms)[0m  [1m[34mSELECT "customers".* FROM "customers" WHERE "customers"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/customers_controller.rb:92:in `set_customer'
+Completed 406 Not Acceptable in 2ms (ActiveRecord: 0.2ms | Allocations: 1140)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#edit is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/customers/new" for ::1 at 2024-12-16 20:39:33 +0530
+Processing by CustomersController#new as HTML
+Completed 406 Not Acceptable in 1ms (ActiveRecord: 0.0ms | Allocations: 706)
+
+
+  
+ActionController::MissingExactTemplate (CustomersController#new is missing a template for request formats: text/html):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (7.0.8.7) lib/action_controller/metal/basic_implicit_render.rb:7:in `send_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:215:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rendering.rb:165:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:234:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:118:in `block in run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in `with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in `turbo_tracking_request_id'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+actiontext (7.0.8.7) lib/action_text/rendering.rb:20:in `with_renderer'
+actiontext (7.0.8.7) lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `instance_exec'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:127:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/rails/info/routes?path=customer_groups" for ::1 at 2024-12-16 20:39:47 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer_groups"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 2251)
+
+
+Started GET "/rails/info/routes?path=customer_groups" for ::1 at 2024-12-16 20:39:48 +0530
+Processing by Rails::InfoController#routes as */*
+  Parameters: {"path"=>"customer_groups"}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms | Allocations: 956)
+
+
+Started POST "/customer_groups" for 127.0.0.1 at 2024-12-16 20:43:35 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"{\"name\":\"Apple MacBook Pro 16\", is_default: true}"=>nil}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 0ms (ActiveRecord: 0.0ms | Allocations: 553)
+
+
+  
+ActionController::InvalidAuthenticityToken (Can't verify CSRF token authenticity.):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:253:in `handle_unverified_request'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:286:in `handle_unverified_request'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:275:in `verify_authenticity_token'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/customer_groups%20-d%20%27%7B%22name%22:%22Apple%20MacBook%20Pro%2016%22,%20is_default:%20true%7D%27" for 127.0.0.1 at 2024-12-16 20:44:29 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/customer_groups%20-d%20%27%7B%22name%22:%22Apple%20MacBook%20Pro%2016%22,%20is_default:%20true%7D%27"):
+  
+Started POST "/customer_groups%7B%22name%22:%22Apple%20MacBook%20Pro%2016%22,%20is_default:%20true%7D%27" for 127.0.0.1 at 2024-12-16 20:44:33 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/customer_groups%7B%22name%22:%22Apple%20MacBook%20Pro%2016%22,%20is_default:%20true%7D%27"):
+  
+Started POST "/customer_groups%22name%22:%22Apple%20MacBook%20Pro%2016%22,%20is_default:%20true%7D%27" for 127.0.0.1 at 2024-12-16 20:44:35 +0530
+  
+ActionController::RoutingError (No route matches [POST] "/customer_groups%22name%22:%22Apple%20MacBook%20Pro%2016%22,%20is_default:%20true%7D%27"):
+  
+Started POST "/customer_groups" for 127.0.0.1 at 2024-12-16 20:44:38 +0530
+Processing by CustomerGroupsController#create as JSON
+  Parameters: {"query"=>"\n    query IntrospectionQuery {\n      __schema {\n        \n        queryType { name }\n        mutationType { name }\n        subscriptionType { name }\n        types {\n          ...FullType\n        }\n        directives {\n          name\n          description\n          \n          locations\n          args {\n            ...InputValue\n          }\n        }\n      }\n    }\n\n    fragment FullType on __Type {\n      kind\n      name\n      description\n      \n      fields(includeDeprecated: true) {\n        name\n        description\n        args {\n          ...InputValue\n        }\n        type {\n          ...TypeRef\n        }\n        isDeprecated\n        deprecationReason\n      }\n      inputFields {\n        ...InputValue\n      }\n      interfaces {\n        ...TypeRef\n      }\n      enumValues(includeDeprecated: true) {\n        name\n        description\n        isDeprecated\n        deprecationReason\n      }\n      possibleTypes {\n        ...TypeRef\n      }\n    }\n\n    fragment InputValue on __InputValue {\n      name\n      description\n      type { ...TypeRef }\n      defaultValue\n      \n      \n    }\n\n    fragment TypeRef on __Type {\n      kind\n      name\n      ofType {\n        kind\n        name\n        ofType {\n          kind\n          name\n          ofType {\n            kind\n            name\n            ofType {\n              kind\n              name\n              ofType {\n                kind\n                name\n                ofType {\n                  kind\n                  name\n                  ofType {\n                    kind\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  ", "variables"=>{}, "customer_group"=>{}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 0ms (ActiveRecord: 8.5ms | Allocations: 381)
+
+
+  
+ActionController::InvalidAuthenticityToken (Can't verify CSRF token authenticity.):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:253:in `handle_unverified_request'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:286:in `handle_unverified_request'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:275:in `verify_authenticity_token'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:45:50 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 0ms (ActiveRecord: 0.0ms | Allocations: 422)
+
+
+  
+ActionController::InvalidAuthenticityToken (Can't verify CSRF token authenticity.):
+  
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:253:in `handle_unverified_request'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:286:in `handle_unverified_request'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:275:in `verify_authenticity_token'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:48:02 +0530
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    name: "group 2",
+    is_default: true
+}
+Processing by CustomerGroupsController#create as */*
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 699)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:96:in `rescue in parse_formatted_parameters'
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:92:in `parse_formatted_parameters'
+actionpack (7.0.8.7) lib/action_dispatch/http/request.rb:389:in `block in POST'
+rack (2.2.10) lib/rack/request.rb:69:in `fetch'
+rack (2.2.10) lib/rack/request.rb:69:in `fetch_header'
+actionpack (7.0.8.7) lib/action_dispatch/http/request.rb:388:in `POST'
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:55:in `parameters'
+actionpack (7.0.8.7) lib/action_controller/metal/strong_parameters.rb:1209:in `params'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:487:in `form_authenticity_param'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:354:in `request_authenticity_tokens'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:347:in `any_authenticity_token_valid?'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:342:in `verified_request?'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:272:in `verify_authenticity_token'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:48:41 +0530
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    name: "group 2",
+    is_default: true
+}
+Processing by CustomerGroupsController#create as */*
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 691)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:96:in `rescue in parse_formatted_parameters'
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:92:in `parse_formatted_parameters'
+actionpack (7.0.8.7) lib/action_dispatch/http/request.rb:389:in `block in POST'
+rack (2.2.10) lib/rack/request.rb:69:in `fetch'
+rack (2.2.10) lib/rack/request.rb:69:in `fetch_header'
+actionpack (7.0.8.7) lib/action_dispatch/http/request.rb:388:in `POST'
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:55:in `parameters'
+actionpack (7.0.8.7) lib/action_controller/metal/strong_parameters.rb:1209:in `params'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:487:in `form_authenticity_param'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:354:in `request_authenticity_tokens'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:347:in `any_authenticity_token_valid?'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:342:in `verified_request?'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:272:in `verify_authenticity_token'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:51:33 +0530
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    name: "group 2",
+    is_default: true
+}
+Processing by CustomerGroupsController#create as */*
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 786)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:96:in `rescue in parse_formatted_parameters'
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:92:in `parse_formatted_parameters'
+actionpack (7.0.8.7) lib/action_dispatch/http/request.rb:389:in `block in POST'
+rack (2.2.10) lib/rack/request.rb:69:in `fetch'
+rack (2.2.10) lib/rack/request.rb:69:in `fetch_header'
+actionpack (7.0.8.7) lib/action_dispatch/http/request.rb:388:in `POST'
+actionpack (7.0.8.7) lib/action_dispatch/http/parameters.rb:55:in `parameters'
+actionpack (7.0.8.7) lib/action_controller/metal/strong_parameters.rb:1209:in `params'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:487:in `form_authenticity_param'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:354:in `request_authenticity_tokens'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:347:in `any_authenticity_token_valid?'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:342:in `verified_request?'
+actionpack (7.0.8.7) lib/action_controller/metal/request_forgery_protection.rb:272:in `verify_authenticity_token'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:400:in `block in make_lambda'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:116:in `block in run_callbacks'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:138:in `run_callbacks'
+actionpack (7.0.8.7) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8.7) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8.7) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8.7) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8.7) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8.7) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8.7) lib/abstract_controller/base.rb:151:in `process'
+actionview (7.0.8.7) lib/action_view/rendering.rb:39:in `process'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8.7) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8.7) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8.7) lib/action_dispatch/routing/route_set.rb:852:in `call'
+rack (2.2.10) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.2.10) lib/rack/etag.rb:27:in `call'
+rack (2.2.10) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.10) lib/rack/head.rb:12:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/http/content_security_policy.rb:39:in `call'
+rack (2.2.10) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.10) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+activerecord (7.0.8.7) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8.7) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8.7) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8.7) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8.7) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.10) lib/rack/method_override.rb:24:in `call'
+rack (2.2.10) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8.7) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.10) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8.7) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+railties (7.0.8.7) lib/rails/engine.rb:530:in `call'
+puma (5.6.9) lib/puma/configuration.rb:252:in `call'
+puma (5.6.9) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.9) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.9) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.9) lib/puma/server.rb:443:in `process_client'
+puma (5.6.9) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:54:12 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 504)
+
+
+  
+NoMethodError (undefined method `pry' for #<Binding:0x00007fb3c08a94d8>):
+  
+app/controllers/customer_groups_controller.rb:16:in `create'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:54:25 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 555)
+
+
+  
+NameError (undefined local variable or method `debug' for #<CustomerGroupsController:0x0000000005d1d8>):
+  
+app/controllers/customer_groups_controller.rb:16:in `create'
+Started POST "/customer_groups" for ::1 at 2024-12-16 20:54:33 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Completed   in 19265ms (ActiveRecord: 0.0ms | Allocations: 178369)
+
+
+Started POST "/customer_groups" for ::1 at 2024-12-16 21:02:48 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Completed 400 Bad Request in 4ms (ActiveRecord: 0.0ms | Allocations: 3775)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: customer_group):
+  
+app/controllers/customer_groups_controller.rb:97:in `create_customer_group_params'
+app/controllers/customer_groups_controller.rb:16:in `create'
+Started POST "/customer_groups" for ::1 at 2024-12-16 21:04:13 +0530
+  
+SyntaxError (/home/laptop12/work/Customer_Group_Demo/app/controllers/customer_groups_controller.rb:83: syntax error, unexpected ':', expecting =>
+      bjge: :by_balance_jar_greater_than...
+          ^
+):
+  
+app/controllers/customer_groups_controller.rb:83: syntax error, unexpected ':', expecting =>
+app/controllers/customer_groups_controller.rb:83: syntax error, unexpected ':', expecting =>
+Started POST "/customer_groups" for ::1 at 2024-12-16 21:04:34 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 1.9ms | Allocations: 5896)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'is_default' for CustomerGroup.):
+  
+app/controllers/customer_groups_controller.rb:16:in `create'
+Started POST "/customer_groups" for ::1 at 2024-12-16 21:06:01 +0530
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+Completed   in 144527ms (ActiveRecord: 1.5ms | Allocations: 144387)
+
+
+Started POST "/customer_groups" for ::1 at 2024-12-16 21:08:31 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+[31mUnpermitted parameter: :is_default. Context: { controller: CustomerGroupsController, action: create, request: #<ActionDispatch::Request:0x00007fc5949a4118>, params: {"name"=>" \"group 2\"", "is_default"=>" false", "controller"=>"customer_groups", "action"=>"create"} }[0m
+Completed   in 100135ms (ActiveRecord: 13.5ms | Allocations: 123658)
+
+
+Started POST "/customer_groups" for ::1 at 2024-12-16 21:10:20 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CustomerGroupsController#create as */*
+  Parameters: {"name"=>" \"group 2\"", "is_default"=>" false"}
+[31mUnpermitted parameter: :is_default. Context: { controller: CustomerGroupsController, action: create, request: #<ActionDispatch::Request:0x00007f7a1b499f70>, params: {"name"=>" \"group 2\"", "is_default"=>" false", "controller"=>"customer_groups", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/operations/customer_groups/create.rb:23:in `save_customer_group'
+  [1m[36mCustomerGroup Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "customer_groups" WHERE LOWER("customer_groups"."name") = LOWER($1) LIMIT $2[0m  [["name", "\"Group 2\""], ["LIMIT", 1]]
+  ↳ app/operations/customer_groups/create.rb:23:in `save_customer_group'
+  [1m[36mCustomerGroup Create (0.2ms)[0m  [1m[32mINSERT INTO "customer_groups" ("name", "is_deafult", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "\"Group 2\""], ["is_deafult", nil], ["created_at", "2024-12-16 15:40:20.756048"], ["updated_at", "2024-12-16 15:40:20.756048"]]
+  ↳ app/operations/customer_groups/create.rb:23:in `save_customer_group'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/operations/customer_groups/create.rb:6:in `call'
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 3.6ms | Allocations: 14684)
+
+
+  
+NameError (uninitialized constant #<Class:CustomerGroups::Create>::Exceptions):
+  
+app/operations/customer_groups/create.rb:16:in `rescue in call'
+app/operations/customer_groups/create.rb:4:in `call'
+app/controllers/customer_groups_controller.rb:17:in `create'

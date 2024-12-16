@@ -1,0 +1,14 @@
+defaults: &defaults
+  adapter: postgresql
+  pool: 15
+  username: postgres
+  password: postgres
+  host: localhost
+
+development:
+  <<: *defaults
+  database: customer_group_demo
+
+test:
+  <<: *defaults
+  database: customer_group_demo
