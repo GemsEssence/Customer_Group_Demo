@@ -53,6 +53,21 @@ gem "bootsnap", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'rspec-rails', '~> 6.0'
+  
+  # For test factories
+  gem "factory_bot_rails", "~> 6.4"
+
+  # For generating fake test data
+  gem 'faker'                  
+  
+  # Clean up the test database
+  gem 'database_cleaner-active_record'
+  
+  #for matching tests cases
+  gem 'shoulda-matchers', '~> 6.2'
+  gem "pry"
+
 end
 
 group :development do

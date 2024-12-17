@@ -31,7 +31,7 @@ class CustomerGroup < ApplicationRecord
     throw :abort if errors.any?
   end
 
-  def total_due_amount
+  def due_amount
     customers.sum(:due_amount)
   end
 end

@@ -1,0 +1,72 @@
+class CustomerGroup < ApplicationRecord
+  include Titleize
+  titleizable :name
+
+  validates :name, presence: true
+  validates :name, length: { minimum: 3, maximum: 50 }
+  validates :name, uniqueness: {
+    case_sensitive: false,
+    message: 'should be uniq, Group already present with same name.'
+  }
+
+  has_many :customers
+
+  scope :default, -> { where(is_default: true) }
+  scope :by_name, ->(name) { where('lower(name) ilike ?', "%#{name}%") }
+
+  before_destroy :validate_delete_customer_group
+
+  def validate_delete_customer_group
+    errors.add(:base, "you can't delete default user group") if is_default
+    throw :abort if errors.any?
+  end
+
+  def due_amount
+    customers.sum(:due_amount)
+  end
+end
+
+def validate_delete_customer_group
+  errors.add(:base, "you can't delete default user group") if is_default
+  throw :abort if errors.any?
+end
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+--- add the rspec for above  validation of model CustomerGroup
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+ChatGPT said:
+Here's an RSpec test suite for the validate_delete_customer_group method in your CustomerGroup model. The test ensures that attempting to delete a CustomerGroup with is_default set to true raises an error and prevents deletion.
+
+
+# spec/models/customer_group_spec.rb
+require 'rails_helper'
+
+RSpec.describe CustomerGroup, type: :model do
+  describe 'callbacks' do
+    describe '#validate_delete_customer_group' do
+      let!(:default_group) { CustomerGroup.create(name: 'Default Group', is_default: true) }
+      let!(:regular_group) { CustomerGroup.create(name: 'Regular Group', is_default: false) }
+
+      context 'when the group is default' do
+        it 'does not allow the group to be deleted' do
+          expect { default_group.destroy }.not_to change { CustomerGroup.count }
+          expect(default_group.errors[:base]).to include("You can't delete the default user group")
+        end
+      end
+
+      context 'when the group is not default' do
+        it 'allows the group to be deleted' do
+          expect { regular_group.destroy }.to change { CustomerGroup.count }.by(-1)
+          expect(regular_group.destroyed?).to be true
+        end
+      end
+    end
+  end
+end
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ END +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
