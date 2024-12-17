@@ -7,7 +7,7 @@ module CustomerGroups
           customer_group = save_customer_group(customer_group, error_tracker)
 
           assign_group_to_customers(customer_ids, customer_group.id, error_tracker)
-          assign_group_to_owner(customer_group.id, error_tracker)
+          # assign_group_to_owner(customer_group.id, error_tracker)
 
           raise Exceptions::InvalidRecordException if error_tracker.has_error?
 

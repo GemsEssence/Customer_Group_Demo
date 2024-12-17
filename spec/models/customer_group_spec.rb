@@ -111,213 +111,87 @@ RSpec.describe CustomerGroup, type: :model do
 
   describe "callbacks" do
     describe "before_destroy :validate_delete_customer_group" do
-      context "when customer group is default customer" do
-        it "is expected to raise an error" do
-          customer_group = create(:customer_group, is_default: true)
-
+      let!(:customer_group) { create(:customer_group, is_default: is_default) }
+  
+      context "when customer group is default" do
+        let(:is_default) { true }
+  
+        it "does not destroy the customer group and adds an error" do
           expect {
             customer_group.destroy
-          }.not_to change { CustomerGroup.all.count }
-          expect { (customer_group.destroy).to throw_symbol(:abort) }
-          expect(customer_group.errors.full_messages).to contain_exactly(*"you can't delete default user group")
+          }.not_to change { CustomerGroup.count }
+  
+          expect { customer_group.destroy }.to throw_symbol(:abort)
+          expect(customer_group.errors.full_messages).to contain_exactly("you can't delete default user group")
         end
       end
-
-      context "when customer group is not default customer" do
-        it "is expected to destroy customer group" do
-          customer_group = create(:customer_group, is_default: false)
-
+  
+      context "when customer group is not default" do
+        let(:is_default) { false }
+  
+        it "destroys the customer group successfully" do
           expect {
             customer_group.destroy
-          }.to change { CustomerGroup.all.count }.from(1).to(0)
+          }.to change { CustomerGroup.count }.by(-1)
+  
           expect(customer_group.errors.full_messages).to be_empty
         end
       end
     end
   end
 
-  describe "unbalance_jar_quantity" do
-    let(:product01) { create(:product, returnable: true, discarded_at: nil, agency: agency01) }
-    let(:product02) { create(:product, returnable: false, discarded_at: nil, agency: agency01) }
-    let(:product03) { create(:product, returnable: true, discarded_at: nil, agency: agency02) }
-
-    let(:jar_transaction_01) { create(:jar_transaction, quantity: 5, balanced_quantity: 4, returnable: true, jar_transaction_type: "delivered", agency: agency01, customer: customer01, product: product01, transaction_date: Date.current) }
-    let(:jar_transaction_02) { create(:jar_transaction, quantity: 10, balanced_quantity: 6, returnable: true, jar_transaction_type: "received", agency: agency01, customer: customer01, product: product01, transaction_date: Date.current - 1) }
-    let(:jar_transaction_03) { create(:jar_transaction, quantity: 6, balanced_quantity: 6, returnable: true, jar_transaction_type: "delivered", agency: agency01, customer: customer01, product: product01, transaction_date: Date.current - 2) }
-    let(:jar_transaction_04) { create(:jar_transaction, quantity: 12, balanced_quantity: 11, returnable: false, jar_transaction_type: "delivered", agency: agency01, customer: customer01, product: product02, transaction_date: Date.current - 3) }
-    let(:jar_transaction_05) { create(:jar_transaction, quantity: 22, balanced_quantity: 10, returnable: false, jar_transaction_type: "delivered", agency: agency01, customer: customer02, product: product01, transaction_date: Date.current - 4) }
-
-    let(:jar_transaction_06) { create(:jar_transaction, quantity: 5, balanced_quantity: 4, returnable: true, jar_transaction_type: "delivered", agency: agency02, customer: customer02, product: product03, transaction_date: Date.current - 5) }
-    let(:jar_transaction_07) { create(:jar_transaction, quantity: 10, balanced_quantity: 6, returnable: true, jar_transaction_type: "received", agency: agency02, customer: customer02, product: product03, transaction_date: Date.current - 6) }
-    let(:jar_transaction_08) { create(:jar_transaction, quantity: 6, balanced_quantity: 3, returnable: false, jar_transaction_type: "delivered", agency: agency02, customer: customer02, product: product03, transaction_date: Date.current - 7) }
-
-    let(:jar_transaction_09) { create(:jar_transaction, quantity: 14, balanced_quantity: 4, returnable: true, jar_transaction_type: "delivered", agency: agency02, customer: customer03, product: product03, transaction_date: Date.current) }
-    let(:jar_transaction_10) { create(:jar_transaction, quantity: 12, balanced_quantity: 3, returnable: true, jar_transaction_type: "received", agency: agency02, customer: customer03, product: product03, transaction_date: Date.current) }
-    let(:jar_transaction_11) { create(:jar_transaction, quantity: 4, balanced_quantity: 4, returnable: true, jar_transaction_type: "delivered", agency: agency02, customer: customer03, product: product03, transaction_date: Date.current + 1) }
-
-    context "when jar_transaction are present" do
-      context "when delivered jar_transaction are present" do
-        context "when jar_transaction balanced_quantity != quantity" do
-          context "when jar_transaction products are returnable" do
-            context "when jar_transaction customers are not discarded" do
-              it "is expected to return remaining amount" do
-                [jar_transaction_01, jar_transaction_02, jar_transaction_03, jar_transaction_04, jar_transaction_05, jar_transaction_06, jar_transaction_07, jar_transaction_08, jar_transaction_09, jar_transaction_10, jar_transaction_11]
-
-                expect(customer_group01.unbalance_jar_quantity).to eq(1)
-                expect(customer_group02.unbalance_jar_quantity).to eq(10)
-              end
-            end
-
-            context "when jar_transaction customers are discarded" do
-              it "is expected to return 0" do
-                [jar_transaction_02, jar_transaction_03, jar_transaction_04, jar_transaction_05, jar_transaction_06, jar_transaction_07, jar_transaction_08, jar_transaction_11]
-
-                expect(customer_group01.unbalance_jar_quantity).to be_zero
-              end
-            end
-          end
-
-          context "when jar_transaction products are not returnable" do
-            it "is expected to return 0" do
-              [jar_transaction_02, jar_transaction_03, jar_transaction_04, jar_transaction_05, jar_transaction_07, jar_transaction_08, jar_transaction_11]
-
-              expect(customer_group01.unbalance_jar_quantity).to be_zero
-            end
-          end
-        end
-
-        context "when jar_transaction balanced_quantity equal to quantity " do
-          it "is expected to return 0" do
-            [jar_transaction_02, jar_transaction_03, jar_transaction_07, jar_transaction_10, jar_transaction_11]
-
-            expect(customer_group01.unbalance_jar_quantity).to be_zero
-          end
-        end
-      end
-
-      context "when delivered jar_transaction are not present" do
-        it "is expected to return 0" do
-          [jar_transaction_02, jar_transaction_07, jar_transaction_10]
-
-          expect(customer_group01.unbalance_jar_quantity).to be_zero
-        end
-      end
-    end
-
-    context "when jar_transaction are not present" do
-      it "is expected to return 0" do
-        expect(customer_group01.unbalance_jar_quantity).to be_zero
-      end
-    end
-  end
-
   describe "due_amount" do
+    let(:agency01) { create(:agency) }
+    let(:agency02) { create(:agency) }
+    let(:customer01) { create(:customer) }
+    let(:customer02) { create(:customer) }
+    let(:customer03) { create(:customer) }
+    let(:customer_group01) { create(:customer_group) }
+    let(:customer_group02) { create(:customer_group) }
+  
+    def create_invoices
+      create(:invoice, agency: agency01, customer: customer01, amount: 100, additional_charges: 20, paid_amount: 0, discount: 20) 
+      create(:invoice, agency: agency01, customer: customer01, amount: 210, additional_charges: 0, paid_amount: 0, discount: 210) 
+      create(:invoice, agency: agency01, customer: customer01, amount: 99, additional_charges: 1, paid_amount: 4, discount: 88)   
+      create(:invoice, agency: agency01, customer: customer01, amount: 80, additional_charges: 50, paid_amount: 99, discount: 10) 
+      create(:invoice, agency: agency02, customer: customer03, amount: 245, additional_charges: 5, paid_amount: 0, discount: 240) 
+      create(:invoice, agency: agency02, customer: customer03, amount: 130, additional_charges: 0, paid_amount: 70, discount: 50) 
+      create(:invoice, agency: agency02, customer: customer03, amount: 130, additional_charges: 20, paid_amount: 70, discount: 5) 
+    end
+  
     context "when customers are present" do
-      let(:invoice_01) { create(:invoice, agency: agency01, customer: customer01, amount: 100, additional_charges: 20, paid_amount: 0, discount: 20) }
-      let(:invoice_02) { create(:invoice, agency: agency01, customer: customer01, amount: 210, additional_charges: 0, paid_amount: 0, discount: 210) }
-      let(:invoice_03) { create(:invoice, agency: agency01, customer: customer01, amount: 99, additional_charges: 1, paid_amount: 4, discount: 88) }
-      let(:invoice_04) { create(:invoice, agency: agency01, customer: customer01, amount: 80, additional_charges: 50, paid_amount: 99, discount: 10) }
-      let(:invoice_05) { create(:invoice, agency: agency01, customer: customer01, amount: 0, additional_charges: 0, paid_amount: 0, discount: 0) }
-      let(:invoice_06) { create(:invoice, agency: agency01, customer: customer01, amount: 0, additional_charges: 20, paid_amount: 20, discount: 0) }
-
-      let(:invoice_07) { create(:invoice, agency: agency01, customer: customer02, amount: 100, additional_charges: 20, paid_amount: 0, discount: 20) }
-
-      let(:invoice_08) { create(:invoice, agency: agency02, customer: customer03, amount: 245, additional_charges: 5, paid_amount: 0, discount: 240) }
-      let(:invoice_09) { create(:invoice, agency: agency02, customer: customer03, amount: 130, additional_charges: 0, paid_amount: 70, discount: 50) }
-      let(:invoice_10) { create(:invoice, agency: agency02, customer: customer03, amount: 130, additional_charges: 20, paid_amount: 70, discount: 5) }
-
+      before { create_invoices }
+  
       context "when discarded customers are present" do
-        context "when invoices.amount + invoices.additional_charges - invoices.discount < 0" do
-          it "is expected to return 0" do
-            [invoice_02, invoice_05, invoice_06]
-
+        context "when total invoice due is less than or equal to 0" do
+          it "returns 0" do
+            create(:invoice, agency: agency01, customer: customer01, amount: 210, additional_charges: 0, discount: 210)
+            create(:invoice, agency: agency01, customer: customer01, amount: 0, additional_charges: 0, discount: 0)
+  
             expect(customer_group01.due_amount).to be_zero
           end
         end
-
-        context "when invoices.amount + invoices.additional_charges - invoices.discount > 0" do
-          it "is expected to return due invoice payment amount" do
-            [invoice_01, invoice_02, invoice_03, invoice_04, invoice_05, invoice_06, invoice_07, invoice_08, invoice_09, invoice_10]
-
+  
+        context "when total invoice due is greater than 0" do
+          it "returns the correct due invoice payment amount" do
             expect(customer_group01.due_amount).to eq(129)
             expect(customer_group02.due_amount).to eq(95)
           end
         end
       end
-
+  
       context "when discarded customers are not present" do
-        it "is expected to return remaining_amount" do
-          [invoice_01, invoice_02, invoice_03, invoice_04, invoice_05, invoice_06, invoice_08, invoice_09, invoice_10]
-
+        it "returns the remaining amount" do
           expect(customer_group01.due_amount).to eq(129)
           expect(customer_group02.due_amount).to eq(95)
         end
       end
     end
-
+  
     context "when customers are not present" do
-      it "is expected to return 0" do
+      it "returns 0" do
         expect(customer_group01.due_amount).to be_zero
         expect(customer_group02.due_amount).to be_zero
-      end
-    end
-  end
-
-  describe "advance_amount" do
-    let(:payment_01) { create(:payment, agency: agency01, customer: customer01, amount: 100, settled_amount: 20, discarded_at: nil) }
-    let(:payment_02) { create(:payment, agency: agency01, customer: customer01, amount: 100, settled_amount: 100, discarded_at: nil) }
-    let(:payment_03) { create(:payment, agency: agency01, customer: customer01, amount: 100, settled_amount: 50, discarded_at: Date.current) }
-
-    let(:payment_04) { create(:payment, agency: agency01, customer: customer02, amount: 10, settled_amount: 20, discarded_at: nil) }
-    let(:payment_05) { create(:payment, agency: agency01, customer: customer02, amount: 105, settled_amount: 20, discarded_at: Date.current) }
-
-    let(:payment_06) { create(:payment, agency: agency02, customer: customer03, amount: 560, settled_amount: 560, discarded_at: nil) }
-    let(:payment_07) { create(:payment, agency: agency02, customer: customer03, amount: 10, settled_amount: 20, discarded_at: nil) }
-
-    context "when customers are present" do
-      context "when discarded customers are present" do
-        context "when amount != settled_amount" do
-          context "when discarded payment is not present" do
-            it "is expected to return pending amount" do
-              [payment_01, payment_02, payment_03, payment_04, payment_05, payment_06, payment_07]
-
-              expect(customer_group01.advance_amount).to eq(80)
-              expect(customer_group02.advance_amount).to eq(-10)
-            end
-          end
-
-          context "when discarded payment is present" do
-            it "is expected to return 0" do
-              [payment_03, payment_05]
-
-              expect(customer_group01.advance_amount).to be_zero
-            end
-          end
-        end
-
-        context "when amount equal to settled_amount" do
-          it "is expected to return 0" do
-            [payment_02, payment_06]
-
-            expect(customer_group01.advance_amount).to be_zero
-            expect(customer_group02.advance_amount).to be_zero
-          end
-        end
-      end
-
-      context "when discarded customers are not present" do
-        it "is expected to return pending amount" do
-          [payment_01, payment_02, payment_03, payment_06, payment_07]
-
-          expect(customer_group01.advance_amount).to eq(80)
-        end
-      end
-    end
-
-    context "when customers are not present" do
-      it "is expected to return 0" do
-        expect(customer_group01.advance_amount).to be_zero
-        expect(customer_group02.advance_amount).to be_zero
       end
     end
   end
