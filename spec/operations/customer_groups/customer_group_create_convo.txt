@@ -167,5 +167,5 @@ RSpec.describe CustomerGroups::Create do
   end
 end
 
-
+NOTE - There are some changes we did after taking the code from the AI
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ END ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

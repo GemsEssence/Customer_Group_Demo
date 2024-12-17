@@ -45,7 +45,7 @@ module CustomerGroups
 
       def valid_positions?(customer_group, positions)
         # allowing only update one user position at a time.
-        positions.count == 1 && positions.min >= 1 && positions.max <= customer_group.customers.kept.count
+        positions.count == 1 && positions.min >= 1 && positions.max <= customer_group.customers.count
       end
 
       def all_customers_belong_to_agency?(customer_ids)
@@ -54,13 +54,12 @@ module CustomerGroups
 
       def update_customer_group_name(customer_group, name, error_tracker)
         return true if name.blank?
-
         customer_group.update(name:)
         error_tracker.add_errors(customer_group.errors.full_messages) if customer_group.errors.any?
       end
 
       def remove_customers_from_groups(customer_group, remove_customer_ids, error_tracker)
-        default_customer_group_id = CustomerGroups.default.first.id
+        default_customer_group_id = CustomerGroup.default.first.id
         customers = customer_group.customers.where(id: remove_customer_ids)
         customer_group_ids = customers.pluck(:customer_group_id)
 
@@ -69,7 +68,7 @@ module CustomerGroups
       end
 
       def assign_customers_to_group(customer_group, customer_ids, error_tracker)
-        customers = customers.where(id: customer_ids)
+        customers = Customer.where(id: customer_ids)
         customer_group_ids = customers.pluck(:customer_group_id)
 
         update_customers_group(customers, { customer_group_id: customer_group.id }, error_tracker)

@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string
-#  is_default :boolean          default(FALSE)
+#  is_deafult :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -21,13 +21,13 @@ class CustomerGroup < ApplicationRecord
 
   has_many :customers
 
-  scope :default, -> { where(is_default: true) }
+  scope :default, -> { where(is_deafult: true) }
   scope :by_name, ->(name) { where('lower(name) ilike ?', "%#{name}%") }
 
   before_destroy :validate_delete_customer_group
 
   def validate_delete_customer_group
-    errors.add(:base, "you can't delete default user group") if is_default
+    errors.add(:base, "you can't delete default user group") if self.is_deafult
     throw :abort if errors.any?
   end
 

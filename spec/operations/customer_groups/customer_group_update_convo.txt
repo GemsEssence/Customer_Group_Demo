@@ -622,7 +622,7 @@ Multiple Customer Updates: Validates that multiple customers can be updated corr
 This suite ensures that all the positive scenarios are thoroughly tested, providing confidence in the correctness of your code under valid conditions.
 
 
-
+NOTE - There are some changes we did after taking the code from the AI
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ END +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 

@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_16_133409) do
   create_table "customer_groups", force: :cascade do |t|
     t.string "name"
     t.boolean "is_deafult"
+    t.float "due_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

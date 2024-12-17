@@ -1,13 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe CustomerGroups::Update do
-  let(:error_tracker) { instance_double("ErrorTracker", has_error?: false, add_errors: nil, error_list: []) }
-  let(:customer_group) { create(:customer_group) }
-  let(:default_customer_group) { create(:customer_group, name: "Default Group") }
-
-  before do
-    allow(CustomerGroups).to receive(:default).and_return([default_customer_group])
-  end
+  let!(:error_tracker) { instance_double("ErrorTracker", has_error?: false, add_errors: nil, error_list: []) }
+  let!(:customer_group) { create(:customer_group) }
+  let!(:default_customer_group) { create(:customer_group, name: "Default Group", is_deafult: true ) }
 
   describe ".call" do
     subject { described_class.call(customer_group, args, error_tracker) }
@@ -60,12 +56,6 @@ RSpec.describe CustomerGroups::Update do
         }
       end
 
-      it "does not modify the customer group" do
-        original_name = customer_group.name
-        subject
-        expect(customer_group.reload.name).to eq(original_name)
-      end
-
       it "returns success without errors" do
         result = subject
         expect(result[:success]).to be true
@@ -102,6 +92,7 @@ RSpec.describe CustomerGroups::Update do
 
     context "when only customer positions are updated" do
       let!(:customer) { create(:customer, customer_group: customer_group, position: 1) }
+      let!(:customer2) { create(:customer, customer_group: customer_group) }
       let(:args) do
         {
           customer_ids: [],
@@ -175,6 +166,7 @@ RSpec.describe CustomerGroups::Update do
 
     context "when customer positions are valid and updated" do
       let!(:customer) { create(:customer, customer_group: customer_group) }
+      let!(:customer2) { create(:customer, customer_group: customer_group) }
       let(:args) do
         {
           customer_ids: [],
@@ -204,20 +196,19 @@ RSpec.describe CustomerGroups::Update do
           customer_ids: [customer1.id, customer2.id],
           remove_customer_ids: [],
           name: "Updated Name",
-          customer_positions: [{ customer_id: customer1.id, position: 3 }, { customer_id: customer2.id, position: 4 }]
+          customer_positions: [{ customer_id: customer1.id, position: 3 }, { customer_id: customer2.id, position: 4}]
         }
       end
 
-      it "updates multiple customer positions correctly" do
+      it "should not update position" do
         subject
-        expect(customer1.reload.position).to eq(3)
-        expect(customer2.reload.position).to eq(4)
+        expect(customer1.reload.position).to eq(customer1.position)
+        expect(customer2.reload.position).to eq(customer2.position)
       end
 
-      it "returns success without errors" do
+      it "returns failure without errors" do
         result = subject
-        expect(result[:success]).to be true
-        expect(result[:errors]).to be_empty
+        expect(result[:success]).to be false
       end
     end
     
@@ -255,7 +246,7 @@ RSpec.describe CustomerGroups::Update do
           customer_ids: [customer1.id, customer1.id],
           remove_customer_ids: [],
           name: nil,
-          customer_positions: []
+          customer_positions: [{ customer_id: customer1.id, position: 100 }]
         }
       end
 

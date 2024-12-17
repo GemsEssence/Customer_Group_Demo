@@ -27,8 +27,8 @@ module CustomerGroups
       end
 
       def assign_group_to_customers(customer_ids, customer_group_id, error_tracker)
-        customers = Customers.where(id: customer_ids)
-        customer_group_ids = Customers.pluck(:customer_group_id)
+        customers = Customer.where(id: customer_ids)
+        customer_group_ids = Customer.pluck(:customer_group_id)
 
         update_customers(customers, customer_group_id, error_tracker)
         reset_customer_position(customer_group_ids, customer_group_id, error_tracker)
